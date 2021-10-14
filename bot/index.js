@@ -32,7 +32,7 @@ wss.on('connection', ws => {
   });
 
   ws.on('close', () => {
-    console.log('disconnected');
+    console.log('Disconnected');
   });
   
 });

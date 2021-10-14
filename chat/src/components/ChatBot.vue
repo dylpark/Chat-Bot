@@ -65,18 +65,41 @@ export default {
           this.connection.send('New Connection From Client')
     },
     sendMessage() {
-      this.connect.send({
-        text: this.currentMessage,
-        author: 'Client'
+      let message = this.message
+      let botMessage = this.connection.send(`Bot: ${message}`)
+
+      this.messages.push({
+        text: message,
+        author: 'client'
       })
 
-      this.connection.send({
-        text: 'Response from Bot',
-        author: 'Bot'
+      this.connection.send(message)
+
+      message = ''
+
+      .then(() => {
+        this.message.push({
+          text: botMessage,
+          author: 'bot'
+        })
       })
+
+      // this.connection.send(this.currentMessage)
+      // {
+      //   text: this.currentMessage,
+      //   author: 'Client'
+      // })
+
+      // this.connection.send(this.message)
+      // messages.push(this.message);
+      // {
+      //   text: 'Response from Bot',
+      //   author: 'Bot'
+      // })
     },
     close() {
       this.openChat = false;
+      this.connection.send('Chat Ended')
       this.connection.close();
     }
   }
@@ -95,9 +118,9 @@ export default {
     bottom: 23px;
     right: 28px;
     width: 280px;
-  }
+  } */
 
-  .close-button {
+  /* .close-button {
     background-color: #ff0000;
     color: white;
     padding: 16px 20px;
@@ -108,59 +131,59 @@ export default {
     bottom: 23px;
     right: 28px;
     width: 280px;
-  }
+  } */
 
-.chat-box,
+/* .chat-box,
 .chat-box-list {
   display: flex;
   flex-direction: column;
   list-style-type: none;
-}
+} */
 
-.chat-box-list-container {
+/* .chat-box-list-container {
   overflow: scroll;
   margin-bottom: 1px;
-}
+} */
 
-.chat-bot-list {
+/* .chat-bot-list {
   padding-left: 10px;
   padding-right: 10px;
-}
+} */
 
-.chat-bot-list, span {
+/* .chat-bot-list, span {
   padding: 8px;
   color: white;
   border-radius: 4px;
-}
+} */
 
-.chat-bot-list, .server, span {
+/* .chat-bot-list, .server, span {
     background: #99cc00;
-}
+} */
 
-.chat-bot-list, .server, p {
+/* .chat-bot-list, .server, p {
     float: right;
-}
+} */
 
-.chat-bot-list, .client, span {
+/* .chat-bot-list, .client, span {
     background: #0070C8;
-}
+} */
 
-.chat-bot-list, .client, p {
+/* .chat-bot-list, .client, p {
     float: left;
-}
+} */
 
-.chat-bot {
+/* .chat-bot {
   max-width: 300px;
   padding: 10px;
   background-color: white;
-}
+} */
 
-.chat-inputs {
+/* .chat-inputs {
   background-color: #ddd;
   outline: none;
-}
+} */
 
-.chat-inputs, input {
+/* .chat-inputs, input {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -168,9 +191,9 @@ export default {
   background: #f1f1f1;
   resize: none;
   min-height: 200px;
-}
+} */
 
-.chat-inputs, button {
+/* .chat-inputs, button {
   background-color: #04AA6D;
   color: white;
   padding: 16px 20px;
