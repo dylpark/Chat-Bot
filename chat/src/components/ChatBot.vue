@@ -29,59 +29,58 @@
           </v-toolbar>
 
             <div v-if="openChat" >
-              <ul>
-                <v-list shaped
+              <ul class="chat-bot-list">
+                <v-list-item 
+                two line 
+                shaped
                 v-for="(message, index) in messages"
                 :key="index"
-                :class="message.author"
+                :class="message.author"                
                 >
-                  <p>
-                    <span>{{ message.author }}</span>
-                    <span>{{ message.text }}</span>
-                  </p>
-                </v-list>
+                
+                <v-list-item-content>
+                  <v-list-item-title>{{ message.text }}</v-list-item-title>
+                  <v-list-item-subtitle>{{ message.author }}</v-list-item-subtitle>
+                </v-list-item-content>
+
+                </v-list-item>
               </ul>
+              
+
             </div>
 
             <v-row>
               <v-col cols="9">
 
                 <v-text-field 
-                  type="text" 
+                  type="text"
+                  label="Message"
+                  outlined
+                  hide-details="auto" 
                   v-model="message" 
                   @keyup.enter="sendMessage"
-                  label="Main input"
-                  :rules="rules"
-                  hide-details="auto">
+                  >
                 </v-text-field>
 
               </v-col>
-              <v-col cols="2">
-
-                <v-btn
-                  elevation="2"
-                  color="blue"
-                  outlined
-                  rounded
-                >Send
-                </v-btn>
+              <v-col cols="1">
+                    <v-btn
+                    slot="append-outer"
+                    elevation="1"
+                    color="primary"
+                    
+                    rounded
+                    @click:append="sendMessage"
+                    >Send
+                  </v-btn>
+                
 
               </v-col>
             </v-row>
+
         </v-card>
       </v-col>
     </v-row>
-
-      <!--------------------------
-      <v-btn class="close-button"
-        elevation="2"
-        color="red"
-        outlined
-        small
-        type="button" 
-        @click="close">Close
-      </v-btn>
-      --------------------------->
 
   </v-container>
 </template>
@@ -100,6 +99,13 @@ export default {
         'center',
         'end',
       ],
+      items: [
+        {
+          action: 'mdi-message-text',
+          items: [{ title: 'List Item' }],
+          title: 'Live Chat',
+        },
+      ],
     }
 
   },
@@ -109,7 +115,7 @@ export default {
       console.log("Got this back: " + event.data)
       this.messages.push({
         text: event.data,
-        author: 'Bot: '
+        author: 'Bot'
         })
     }
   },
@@ -125,7 +131,7 @@ export default {
       this.connection.send(this.message)
       this.messages.push({
         text: this.message,
-        author: 'Client: '
+        author: 'Client'
       })
     },
 
@@ -137,3 +143,35 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+
+// .chat-bot-list {
+//   padding-left: 0px;
+
+//   span {
+//     padding: 8px;
+//     color: white;
+//     border-radius: 4px;
+//   }
+
+//   .Bot {
+//     span {
+//       background: violet;
+//     }
+//     p {
+//       float: left;
+//     }
+//   }
+
+//     .Client {
+//     span {
+//       background: blue
+//     }
+//     p {
+//       float: right;
+//     }
+//   }
+// }
+
+</style>
