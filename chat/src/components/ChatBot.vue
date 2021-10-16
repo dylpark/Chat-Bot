@@ -1,39 +1,43 @@
 <template>
 
-  <v-container>
-    <v-card
-      class="d-flex flex-row-reverse"
-      :color="$vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4'"
-      flat
-      tile
-    >
-      <v-card
-        v-for="n in 1"
-        :key="n"
-        class="pa-2"
-        outlined
-        tile
-      >
-        Flex item {{ n }}
+  <v-container pa=0>
 
-      <div class="chat-bot">
+    <v-row>
 
-      <v-btn class="open-button"
-        elevation="2"
-        outlined
-        depressed
-        x-large
-        type="button" 
-        @click="open">Open
-      </v-btn>
+      <v-col cols="4" offset="8">
+        <v-toolbar
+        color="pink"
+        dark
+        dense
+        type="button"
+        @click="open"
+        >
+          <v-toolbar-title 
+          class="chat-title"
+          >
+          Live Chat
+          </v-toolbar-title>
+
+          <v-spacer></v-spacer>
+        
+          <v-icon 
+          large
+          color="white"
+          >mdi-message-text
+          </v-icon>
+
+      </v-toolbar>
+      </v-col>
+
+    </v-row>
 
       <v-btn class="close-button"
         elevation="2"
+        color="red"
         outlined
-        depressed
-        x-large
+        small
         type="button" 
-        @click="close">Close Chat
+        @click="close">Close
       </v-btn>
 
       <div v-if="openChat" class="chat-bot-list-container">
@@ -61,16 +65,15 @@
         hide-details="auto">
         </v-text-field>
 
-        <v-btn @click="sendMessage">Send</v-btn>
+        <v-btn 
+        elevation="2"
+        outlined
+        small
+        @click="sendMessage">Send
+        </v-btn>
       </div>
-
-      </div>
-
-  </v-card>
-  </v-card>
 
   </v-container>
-
 </template>
 
 <script>
@@ -96,9 +99,8 @@ export default {
       console.log("Got this back: " + event.data)
       this.messages.push({
         text: event.data,
-        author: 'bot'
+        author: 'Bot'
         })
-
     }
   },
 
@@ -113,7 +115,7 @@ export default {
       this.connection.send(this.message)
       this.messages.push({
         text: this.message,
-        author: 'client'
+        author: 'Client'
       })
     },
 
