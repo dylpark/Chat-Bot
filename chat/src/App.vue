@@ -1,27 +1,32 @@
 <template>
-  <div id="app">
-    <ChatBot msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+      <v-spacer></v-spacer>
+
+    </v-app-bar>
+
+    <v-main>
+      <ChatBot/>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import ChatBot from './components/ChatBot.vue'
+import ChatBot from './components/ChatBot';
 
 export default {
   name: 'App',
-  components: {
-    ChatBot
-  }
-}
-</script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  components: {
+    ChatBot,
+  },
+
+  data: () => ({
+    //
+  }),
+};
+</script>

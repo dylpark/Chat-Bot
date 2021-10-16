@@ -1,15 +1,16 @@
 <template>
-  <section class="chat-bot">
+  <v-container>
+    <div class="chat-bot">
 
-    <button class="open-button"
+    <v-btn class="open-button"
     type="button" 
     @click="open"> Open Chat
-    </button>
+    </v-btn>
 
-    <button class="close-button" 
+    <v-btn class="close-button" 
     type="button" 
     @click="close">Close Chat
-    </button>
+    </v-btn>
       
       <div v-if="openChat" class="chat-bot-list-container">
 
@@ -31,16 +32,20 @@
 
       <div class="chat-inputs">
         
-        <input 
+        <v-text-field 
         type="text" 
         v-model="message" 
         @keyup.enter="sendMessage"
-        />
+        label="Main input"
+        :rules="rules"
+        hide-details="auto">
+        </v-text-field>
         
-        <button @click="sendMessage">Send</button>
+        <v-btn @click="sendMessage">Send</v-btn>
 
       </div>
-  </section>
+  </div>
+  </v-container>
 </template>
 
 <script>
@@ -105,103 +110,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  /* .open-button {
-    background-color: #555;
-    color: white;
-    padding: 16px 20px;
-    border: none;
-    cursor: pointer;
-    opacity: 0.8;
-    position: relative;
-    bottom: 23px;
-    right: 28px;
-    width: 280px;
-  } */
-
-  /* .close-button {
-    background-color: #ff0000;
-    color: white;
-    padding: 16px 20px;
-    border: none;
-    cursor: pointer;
-    opacity: 0.8;
-    position: relative;
-    bottom: 23px;
-    right: 28px;
-    width: 280px;
-  } */
-
-/* .chat-box,
-.chat-box-list {
-  display: flex;
-  flex-direction: column;
-  list-style-type: none;
-} */
-
-/* .chat-box-list-container {
-  overflow: scroll;
-  margin-bottom: 1px;
-} */
-
-/* .chat-bot-list {
-  padding-left: 10px;
-  padding-right: 10px;
-} */
-
-/* .chat-bot-list, span {
-  padding: 8px;
-  color: white;
-  border-radius: 4px;
-} */
-
-/* .chat-bot-list, .server, span {
-    background: #99cc00;
-} */
-
-/* .chat-bot-list, .server, p {
-    float: right;
-} */
-
-/* .chat-bot-list, .client, span {
-    background: #0070C8;
-} */
-
-/* .chat-bot-list, .client, p {
-    float: left;
-} */
-
-/* .chat-bot {
-  max-width: 300px;
-  padding: 10px;
-  background-color: white;
-} */
-
-/* .chat-inputs {
-  background-color: #ddd;
-  outline: none;
-} */
-
-/* .chat-inputs, input {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  border: none;
-  background: #f1f1f1;
-  resize: none;
-  min-height: 200px;
-} */
-
-/* .chat-inputs, button {
-  background-color: #04AA6D;
-  color: white;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  margin-bottom:10px;
-  opacity: 0.8;
-} */
-
-</style>
