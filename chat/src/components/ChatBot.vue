@@ -1,41 +1,34 @@
 <template>
 
-  <v-container>
+  <v-container fluid>
 
-    <v-row>
-      <v-col cols="4" offset="8">
-        <v-card >
+    <v-row class="child-flex">
+      <v-col 
+      cols="12"
+      sm="6"
+      md="4"
+      >
 
-          <v-toolbar
-            color="pink"
-            dark
-            dense
-            type="button"
-            @click="open"
-          >
+      <v-card
+      class="mx-auto"
+      width="300"
+    >
+      <v-list>
 
-          <v-toolbar-title>
-            Live Chat
-          </v-toolbar-title>
-
-          <v-spacer></v-spacer>
-        
-          <v-icon 
-            large
-            color="white"
-            >mdi-message-text
-          </v-icon>
-
-          </v-toolbar>
-
-            <div v-if="openChat" >
-              <ul class="chat-bot-list">
+        <v-list-group
+          :value="false"
+          prepend-icon="mdi-message-text"
+          @click="open"
+        >
+          <template v-slot:activator>
+            <v-list-item-title>Contact Support</v-list-item-title>
+          </template>
+                      <div v-if="openChat" >
+              <v-list shaped>
                 <v-list-item 
                 two line 
-                shaped
                 v-for="(message, index) in messages"
-                :key="index"
-                :class="message.author"                
+                :key="index"               
                 >
                 
                 <v-list-item-content>
@@ -44,14 +37,9 @@
                 </v-list-item-content>
 
                 </v-list-item>
-              </ul>
-              
 
-            </div>
-
-            <v-row>
-              <v-col cols="9">
-
+              </v-list>
+                <v-col cols="12">
                 <v-text-field 
                   type="text"
                   label="Message"
@@ -60,30 +48,24 @@
                   v-model="message" 
                   @keyup.enter="sendMessage"
                   >
-                </v-text-field>
-
-              </v-col>
-              <v-col cols="1">
-                    <v-btn
+                  <v-btn
                     slot="append-outer"
                     elevation="1"
                     color="primary"
-                    
-                    rounded
-                    @click:append="sendMessage"
+                    @click="sendMessage"
                     >Send
                   </v-btn>
-                
-
-              </v-col>
-            </v-row>
-
-        </v-card>
+                </v-text-field>
+                </v-col>
+            </div>
+        </v-list-group>
+      </v-list>
+    </v-card>
       </v-col>
     </v-row>
-
   </v-container>
 </template>
+
 
 <script>
 export default {
@@ -99,13 +81,16 @@ export default {
         'center',
         'end',
       ],
-      items: [
-        {
-          action: 'mdi-message-text',
-          items: [{ title: 'List Item' }],
-          title: 'Live Chat',
-        },
-      ],
+      direction: 'top',
+      fab: false,
+      fling: false,
+      hover: false,
+      tabs: null,
+      top: false,
+      right: true,
+      bottom: true,
+      left: false,
+      transition: 'slide-y-reverse-transition',
     }
 
   },
