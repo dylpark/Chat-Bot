@@ -1,14 +1,8 @@
 <template>
   <v-container fluid>
     <v-row class="mb-6">
-      <v-col 
-      md="6"
-      offset-md="6">
-        <v-card 
-        class="mx-auto" 
-        width="300"
-        shaped
-        >
+      <v-col md="6" offset-md="6">
+        <v-card class="mx-auto" width="300" shaped>
           <v-list>
             <v-list-group
               :value="false"
@@ -28,7 +22,9 @@
                   >
                     <v-list-item-content>
                       <v-list-item-title>{{ message.text }}</v-list-item-title>
-                      <v-list-item-subtitle>{{ message.author }}</v-list-item-subtitle>
+                      <v-list-item-subtitle>{{
+                        message.author
+                      }}</v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>
@@ -69,30 +65,26 @@ export default {
       connection: null,
       message: "",
       messages: [],
-      justify: [
-        'start',
-        'center',
-        'end',
-        'space-around',
-        'space-between',
-      ]
-    }
+      justify: ["start", "center", "end", "space-around", "space-between"],
+    };
   },
   mounted() {
     this.connection = new WebSocket("ws://localhost:3000");
-    this.connection.onmessage = (event) => {
-      console.log("Got this back: " + event.data);
-      this.messages.push({
-        text: event.data,
-        author: "Bot",
-      });
-    };
+    console.log("Starting connection to WebSocket Server");
   },
 
   methods: {
     open() {
       this.openChat = true;
       this.connection.send("Hello!");
+
+      this.connection.onmessage = (event) => {
+        console.log("Got this back: " + event.data);
+        this.messages.push({
+          text: event.data,
+          author: "Bot",
+        });
+      };
     },
 
     sendMessage() {
@@ -101,43 +93,18 @@ export default {
         text: this.message,
         author: "Client",
       });
+      this.message = "";
     },
 
     close() {
       this.openChat = false;
       this.connection.send("Chat Ended");
       this.connection.close();
+      this.message = [];
     },
   },
 };
 </script>
 
 <style scoped lang="scss">
-// .chat-bot-list {
-//   padding-left: 0px;
-
-//   span {
-//     padding: 8px;
-//     color: white;
-//     border-radius: 4px;
-//   }
-
-//   .Bot {
-//     span {
-//       background: violet;
-//     }
-//     p {
-//       float: left;
-//     }
-//   }
-
-//     .Client {
-//     span {
-//       background: blue
-//     }
-//     p {
-//       float: right;
-//     }
-//   }
-// }
 </style>
