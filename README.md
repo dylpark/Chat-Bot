@@ -26,7 +26,7 @@ Then start the Bot - ws://localhost:3000
 node index.js
 ```
 
-Run the Vue App - http://localhost:8080/
+Run the Vue App - http://localhost:8080
 
 ```bash
 npm run serve
