@@ -20,13 +20,13 @@ cd Chat
 npm install
 ```
 
-Then start the Bot - ws://localhost:3000:
+Then start the Bot - ws://localhost:3000
 
 ```bash
 node index.js
 ```
 
-Run the Vue App - http://localhost:8080/:
+Run the Vue App - http://localhost:8080/
 
 ```bash
 npm run serve
